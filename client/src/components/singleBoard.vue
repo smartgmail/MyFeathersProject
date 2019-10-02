@@ -4,12 +4,12 @@
     :loading="loading"
     xs6
   >
-    <v-img v-if="media" class="white--text" height="150px" :src="imageUrl">
-      <v-card-title class="align-end fill-height">{{title}}</v-card-title>
+    <v-img v-if="media" class="white--text" height="150px" :src="board.url">
+      <v-card-title class="align-end fill-height">{{board.name}}</v-card-title>
     </v-img>
-    <v-card-title v-else>{{title}}</v-card-title>
+    <v-card-title v-else>{{board.name}}</v-card-title>
 
-    <v-card-text>{{comment}}</v-card-text>
+    <v-card-text>{{board.comment}}</v-card-text>
     <v-card-actions v-if="actions">
       <!-- <v-btn icon>
         <v-icon>mdi-heart</v-icon>
@@ -38,28 +38,27 @@ export default {
     width: 250,
     height: 100
   }),
-  props: {
-    title: String,
-    imageUrl: String,
-    comment: String,
-    boardID: Number
+  props:{
+    board:Object
+    // title: String,
+    // imageUrl: String,
+    // comment: String,
+    // boardID: Number
   },
   methods: {
     deleteBoard(boardID) {
-      console.log(this.boardID); //这是怎么在methods 中使用 props 中的值的例子
-      this.removeBoard({ id: this.boardID });
+      console.log(this.board); //这是怎么在methods 中使用 props 中的值的例子
+      //this.removeBoard({ id: this.boardID });
+      this.board.remove()
     },
-    showBoardDetial(boardID) {
-      console.log(this.imageUrl)
+    showBoardDetial() {
+      console.log("-==========-"+this.board)
       this.$router.push({
         name: "board",
-        params: {
-          id: this.boardID,
-          url: this.imageUrl
-        }
+        params: this.board
       });
     },
-    ...mapMutations(["removeBoard"])
+    //...mapMutations(["removeBoard"])
   }
 };
 </script>

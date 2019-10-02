@@ -2,9 +2,6 @@
   <v-row justify="end">
     <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-slot:activator="{ on }">
-        <!--<v-btn fab dark small color="indigo" v-on="on">
-          <v-icon dark>mdi-plus</v-icon>
-        </v-btn>-->
         <v-btn text v-on="on">
           <span class="mr-2">Create Board</span>
           <v-icon>fas fa-edit</v-icon>

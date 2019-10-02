@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
 import Boards from './views/Boards.vue'
+import Board from './views/Board.vue'
+
 
 Vue.use(Router)
 
@@ -18,6 +19,11 @@ export default new Router({
       path: '/',
       name: 'boards',
       component: Boards
+    },
+    {
+      path: '/board',
+      name: 'board',
+      component: Board
     },
     {
       path: '/about',
