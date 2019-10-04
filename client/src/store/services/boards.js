@@ -22,6 +22,25 @@ import feathersClient, {
     // get fullName() {
     //   return `${this.firstName} ${this.lastName}`
     // }
+
+    get user () {
+      if (this.userId) {
+        const user = Models.User.getFromStore(this.userId)
+
+        // Fetch the User record if we don't already have it
+        if (!user) {
+          Models.User.get(this.userId)
+        }
+
+        return user
+      } else {
+        return null
+      }
+    }
+    
+    get allBoard(){
+        return all
+    }
     
   }
   Board.modelName = "Board"

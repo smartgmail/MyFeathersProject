@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 
 export default {
   data: () => ({
@@ -46,6 +47,9 @@ export default {
     imageURL: "",
     projectName: ""
   }),
+  computed: {
+    //...mapMutations('boards',{saveBoard:})
+  },
   methods: {
     increase() {
       console.log("pn====================" + this.projectName);
@@ -57,7 +61,7 @@ export default {
         done: "true",
         comment: this.remark
       });
-      newBoard.save();
+      newBoard.save();//这个save是model的method
       this.dialog = false;
     }
   }

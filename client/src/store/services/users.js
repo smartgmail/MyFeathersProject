@@ -12,15 +12,15 @@ class User extends BaseModel {
   
   static instanceDefaults() {
     return {
-      firstName: '',
-      lastName: '',
-      email: '',
+      username:'',
+      displayName:'',
+      imageUrl: '',
       password: ''
     }
   }
-  get fullName() {
-    return `${this.firstName} ${this.lastName}`
-  }
+  // get fullName() {
+  //   return `${this.firstName} ${this.lastName}`
+  // }
 }
 User.modelName = "User"
 const servicePath = 'users'

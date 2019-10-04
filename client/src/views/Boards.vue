@@ -2,16 +2,11 @@
   <v-container fluid>
     <v-row align="start" justify="start">
       <v-col v-for="board in boards.data" :key="board._id" cols="6">
-        <!--<myCard
-          :title="board.name"
-          :imageUrl="board.url"
-          :comment="board.comment"
-          :boardID="board._id"
-        >-->
         <myCard :board="board">   <!--注意这里等号两边不能有空格-->
           <!--这是个父向子组件传值的例子-->
         </myCard>
       </v-col>
+      <!--<v-btn :to="{name:'signup'}">signup</v-btn>-->
     </v-row>
   </v-container>
 </template>
