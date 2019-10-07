@@ -5,12 +5,12 @@
         <v-form
           v-if="!loading"
           v-model="valid"
-          @submit.prevent="login({ valid, user })"
+          @submit.prevent="login({ valid, userinfo })"
           @keydown.prevent.enter
         >
-          <v-text-field v-model="user.username" :rules="notEmptyRules" label="Username" required></v-text-field>
+          <v-text-field v-model="userinfo.username" :rules="notEmptyRules" label="Username" required></v-text-field>
           <v-text-field
-            v-model="user.password"
+            v-model="userinfo.password"
             :rules="notEmptyRules"
             label="Password"
             type="password"
@@ -32,7 +32,7 @@ export default {
   name: "login",
   data: () => ({
     valid: false,
-    user: {
+    userinfo: {
       username: "",
       password: ""
     },
@@ -44,11 +44,11 @@ export default {
   methods: {
       ...mapActions('auth',['authenticate']),
     login() {
-        console.log("========113===== name"+this.user.username+"======"+this.user.password);
+        console.log("========113===== name"+this.userinfo.username+"======"+this.userinfo.password);
       this.authenticate({
         strategy: "local",
-        username: this.user.username,
-        password: this.user.password
+        username: this.userinfo.username,
+        password: this.userinfo.password
       })
         .then(() => {
           // Logged in

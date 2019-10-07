@@ -5,7 +5,7 @@ import feathersClient, {
   } from '../../feathers-client'
   
   // Extend the base class
-  class Board extends BaseModel {
+  class List extends BaseModel {
     constructor(data, options) {
       super(data, options)
     }
@@ -13,40 +13,16 @@ import feathersClient, {
     static instanceDefaults() {
       return {
         name: '',
-        done: '',
-        url: '',
-        comment: '',
+        boardId:''
       }
     }
-    
-    // get fullName() {
-    //   return `${this.firstName} ${this.lastName}`
-    // }
-
-    get user () {
-      if (this.userId) {
-        const user = Models.User.getFromStore(this.userId)
-
-        // Fetch the User record if we don't already have it
-        if (!user) {
-          Models.User.get(this.userId)
-        }
-
-        return user
-      } else {
-        return null
-      }
-    }
-    
-    get allBoard(){
-        return all
-    }
+      
     
   }
-  Board.modelName = "Board"
-  const servicePath = 'boards'
+  List.modelName = "List"
+  const servicePath = 'lists'
   const servicePlugin = makeServicePlugin({
-    Model: Board,
+    Model: List,
     service: feathersClient.service(servicePath),
     servicePath
   })

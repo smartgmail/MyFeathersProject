@@ -60,12 +60,14 @@ export default {
     ...mapActions("auth", { authLogout: "logout" }),
     ...mapActions("auth", { authenticate: "authenticate" }),
     logout() {
+      console.log("======12386===== logout start");
       this.authLogout()
         .then(() => {
           console.log("======12386===== logout success");
           this.$data.showLogin = true;
           this.$data.showSignUp = true;
           this.$data.showLogout = false;
+          console.log("======12386===== going to login");
           this.$router.push("/login");
         })
         .catch(e => {

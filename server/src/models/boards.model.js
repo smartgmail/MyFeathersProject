@@ -10,6 +10,11 @@ module.exports = function (app) {
     done: { type: String, lowercase: true },
     url: { type: String, },
     comment: { type: String },
+    ownerId: {                        //用Userid作为外键
+      type: Schema.Types.ObjectId,
+      ref: 'users',
+      required: true
+    },
   }, {
     timestamps: true
   });

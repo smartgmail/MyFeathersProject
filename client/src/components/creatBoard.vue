@@ -54,6 +54,7 @@ export default {
     increase() {
       console.log("pn====================" + this.projectName);
       console.log("IU====================" + this.imageURL);
+      // console.log("userid !!!!!!!!!!!!! ======" + this.user)
       const { Board } = this.$FeathersVuex.api; //这个也许能换成mapStates的方法？
       const newBoard = new Board({
         name: this.projectName,

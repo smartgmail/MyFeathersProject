@@ -48,8 +48,9 @@ export default {
   methods: {
     deleteBoard(boardID) {
       console.log(this.board); //这是怎么在methods 中使用 props 中的值的例子
+      console.log(this.lists)
       //this.removeBoard({ id: this.boardID });
-      this.board.remove()
+      //this.board.remove()
     },
     showBoardDetial() {
       console.log("-==========-"+this.board)
