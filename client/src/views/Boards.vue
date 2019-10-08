@@ -29,7 +29,7 @@ export default {
 
   computed: {
     ...mapState("auth", { user: "payload" }),
-    //这是去的当前登录用户的方法，下面用user.user._id取得当前登录用户的id 
+    //这是取得当前登录用户的方法，下面用user.user._id取得当前登录用户的id 
     //可以用于查询那些board属于这个用户
     ...mapState("auth", { uid :"entityIdField"}),
     ...mapGetters("boards", { findBoardFromStore: "find" }),

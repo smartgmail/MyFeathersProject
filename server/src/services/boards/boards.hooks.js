@@ -1,6 +1,9 @@
-
-const { authenticate } = require('@feathersjs/authentication').hooks;
-const {setField} = require('feathers-authentication-hooks');
+const TransactionManager = require('feathers-mongoose').TransactionManager
+const isTransactionEnable = true
+const { authenticate } = require('@feathersjs/authentication').hooks
+const { setField } = require('feathers-authentication-hooks')
+const skipPath = ['users']
+const remvoeList = require('../../hooks/lists')
 
 const setUserId = setField({
   from: 'params.user._id',
@@ -11,6 +14,9 @@ const queryUserId = setField({
   from: 'params.user._id',
   as: 'params.query.ownerId'
 })
+
+
+
 
 
 module.exports = {
@@ -25,7 +31,23 @@ module.exports = {
     ],
     update: [],
     patch: [],
-    remove: []
+    remove: [
+      // should add start transaction
+      // () => {
+      //   if (isTransactionEnable) {
+      //     async hook =>
+      //       TransactionManager.beginTransaction(hook, skipPath)
+      //       console.log("tran start")
+      //   }
+      // }
+      async hook => TransactionManager.beginTransaction(hook, skipPath)
+      //remvoeList,
+      //()=>{console.log("remove rely list ")}
+      
+      // should delete all list rely to the board
+
+
+    ]
   },
 
   after: {
@@ -35,7 +57,20 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
-    remove: []
+    remove: [
+      // // should add commit transaction
+      // ()=>{
+      //   if(isTransactionEnable)
+      //     TransactionManager.commitTransaction
+      //     console.log("commit")
+      // }
+      
+        
+          TransactionManager.rollbackTransaction
+    
+          
+      
+    ]
   },
 
   error: {
@@ -45,6 +80,13 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
-    remove: []
+    remove: [
+      //should add rollback transcation
+      ()=>{
+        if(isTransactionEnable)
+          TransactionManager.rollbackTransaction
+      }
+      
+    ]
   }
 };

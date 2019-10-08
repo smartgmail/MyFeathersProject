@@ -23,24 +23,24 @@ import feathersClient, {
     //   return `${this.firstName} ${this.lastName}`
     // }
 
-    get user () {
-      if (this.userId) {
-        const user = Models.User.getFromStore(this.userId)
+    // get user () {
+    //   if (this.userId) {
+    //     const user = Models.User.getFromStore(this.userId)
 
-        // Fetch the User record if we don't already have it
-        if (!user) {
-          Models.User.get(this.userId)
-        }
+    //     // Fetch the User record if we don't already have it
+    //     if (!user) {
+    //       Models.User.get(this.userId)
+    //     }
 
-        return user
-      } else {
-        return null
-      }
-    }
+    //     return user
+    //   } else {
+    //     return null
+    //   }
+    // }
     
-    get allBoard(){
-        return all
-    }
+    // get allBoard(){
+    //     return all
+    // }
     
   }
   Board.modelName = "Board"

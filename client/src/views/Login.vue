@@ -59,6 +59,7 @@ export default {
         .catch(e => {
             
           // Show login page (potentially with `e.message`)
+          alert("please input correct username and password")
           console.error("Authentication error", e);
         });
     }
