@@ -1,9 +1,8 @@
-const TransactionManager = require('feathers-mongoose').TransactionManager
-const isTransactionEnable = true
 const { authenticate } = require('@feathersjs/authentication').hooks
 const { setField } = require('feathers-authentication-hooks')
-const skipPath = ['users']
-const remvoeList = require('../../hooks/lists')
+//const mongoose = require('mongoose');
+
+const {removeList} = require('../../hooks/lists')
 
 const setUserId = setField({
   from: 'params.user._id',
@@ -15,9 +14,16 @@ const queryUserId = setField({
   as: 'params.query.ownerId'
 })
 
-
-
-
+// const removeList = async (context) => {
+//   console.log("inboard context path")
+//   console.log(context.path)
+//   //console.log(context)
+//   const session = context.params.mongoose.session
+//   console.log(session)
+//   const lists = mongoose.model('lists')
+//   await lists.remove({ boardId: context.id }).session(session)
+//   return context
+// }
 
 module.exports = {
   before: {
@@ -32,21 +38,7 @@ module.exports = {
     update: [],
     patch: [],
     remove: [
-      // should add start transaction
-      // () => {
-      //   if (isTransactionEnable) {
-      //     async hook =>
-      //       TransactionManager.beginTransaction(hook, skipPath)
-      //       console.log("tran start")
-      //   }
-      // }
-      async hook => TransactionManager.beginTransaction(hook, skipPath)
-      //remvoeList,
-      //()=>{console.log("remove rely list ")}
-      
-      // should delete all list rely to the board
-
-
+      removeList
     ]
   },
 
@@ -57,20 +49,7 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
-    remove: [
-      // // should add commit transaction
-      // ()=>{
-      //   if(isTransactionEnable)
-      //     TransactionManager.commitTransaction
-      //     console.log("commit")
-      // }
-      
-        
-          TransactionManager.rollbackTransaction
-    
-          
-      
-    ]
+    remove: []
   },
 
   error: {
@@ -80,13 +59,6 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
-    remove: [
-      //should add rollback transcation
-      ()=>{
-        if(isTransactionEnable)
-          TransactionManager.rollbackTransaction
-      }
-      
-    ]
+    remove: []
   }
 };
